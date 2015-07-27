@@ -58,11 +58,25 @@ Radial Glia marker genes loading PC1.
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/kmeansParameters.png" width="302">
 
-K-means Cluster Assignments                                           
+######K-means Cluster Assignments                                           
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/kmeansClusters.png" width="325">
 
-Gaussian-mixture model Cluster Assignments
+######Gaussian-mixture model Cluster Assignments
 
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/GMMClusters.png" width="330">
+
+
+#### Fitting a Minimum-Spanning Tree
+
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/MSTButton.png" width="300"> 
+
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/MSTPlot.png" width="325">
+
+######Gene Expression Across MST Clusters
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/VisualizeExpressionButtonPAX6.png" width="350">
+
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PAX6_MST1.png" width="250"> <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PAX6_MST2.png" width="250">
+
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PAX6_MST3.png" width="250"> <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PAX6SurfacePlot.png" width="280">
