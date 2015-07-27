@@ -3,7 +3,7 @@
 **SCell** is a single-cell 
 
 #### Load Data
-![](https://dl.dropboxusercontent.com/u/9990581/SCell/LoadData.png = 100x20)
+![](https://dl.dropboxusercontent.com/u/9990581/SCell/LoadData.png =100x20)
 
 #### Cell QC
 ![geneExpQuantiles]
