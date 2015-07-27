@@ -26,6 +26,7 @@ Select Lorenz or PRESEQ from the dropdown menu and set a threshold, then click o
 
 
 ## Analyzing Selected Libraries
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/AnalyzeButton.png" width="300"> 
 
 #### PCA Sample Scores and Gene Loading Plots
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAPlots1.png" width="550">
@@ -62,5 +63,6 @@ K-means Cluster Assignments
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/kmeansClusters.png" width="325">
 
 Gaussian-mixture model Cluster Assignments
+
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/GMMClusters.png" width="330">
