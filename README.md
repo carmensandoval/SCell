@@ -31,16 +31,21 @@ Select Lorenz or PRESEQ from the dropdown menu and set a threshold, then click o
 #### PCA Sample Scores and Gene Loading Plots
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAPlots1.png" width="550">
 
-##### Select Strongly Loading Genes.
-Neuronal Genes loading PC1.
+##### View strongly loading Genes.
+**Neuronal** Genes loading PC1.
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAGenesNeuronal.png" width="300">
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAGenesNeuronal2.png" width="300">
 
-Radial Glia marker genes loading PC1.
+**Radial Glia** marker genes loading PC1.
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAGenesRG.png" width="300">
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/PCAGenesRG2.png" width="300">
+
+Hover over genes in Gene Loading plot to view their gene symbol, mean expression, IOD and % of cells expressing it in the **Gene Annotations** panel.
+
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell_Screenshots/GeneAnnotations.png" width="300">
+
 
 #### Visualize gene Expression across cells.
 
