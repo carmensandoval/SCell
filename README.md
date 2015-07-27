@@ -3,7 +3,7 @@
 **SCell** is a single-cell 
 
 #### Load Data
-<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/LoadData.png" style="width: 100px;"/>
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/LoadData.png" width="100">
 
 #### Cell QC
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/GeneExpressionQuantiles.png" style="width: 100px;"/>
