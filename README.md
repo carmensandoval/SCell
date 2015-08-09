@@ -46,7 +46,7 @@ Select the **Normalize selected libraries** button to choose from a range of opt
 
 <img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/SCell_Screenshots/ZIprogress.png" width="250">
 
-<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/SCell_Screenshots/SelectGenes.png" width="250">
+<img src= "https://dl.dropboxusercontent.com/u/9990581/SCell/SCell_Screenshots/GeneSelection.png" width="250">
 
 
 ## Analyzing Selected Libraries
