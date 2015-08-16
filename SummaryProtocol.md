@@ -19,7 +19,7 @@ This will create a new directory called **tophat_out**, which contains the .bam 
 
 Summarize the mapping rates contained in the file **accepted_hits.stats** from each library using the script **comp_mapping_rates.m**
 
-#####c) Gene Expression Quantification
+#####c. Gene Expression Quantification
 The [**FeatureCounts**](http://bioinformatics.oxfordjournals.org/content/30/7/923.full.pdf?keytype=ref&ijkey=ZzPz96t2lqzAH6F) program, from the [**SubRead**](http://subread.sourceforge.net/) package, assigns aligned reads/fragments to genomic features, such as genes. The output of this read summarization process is a count table, which contains the number of reads/fragments assigned to each feature in each of your single-cell libraries.
 
 To obtain a count table from your aligned single-cell libraries, run the shell script 
