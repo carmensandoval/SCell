@@ -4,7 +4,7 @@ This document is intended to serve as a general outline of the steps to follow w
 
 ## 1. Library Pre-processing
 
-###### 1a. Read Trimming and FastQC
+#### 1a. Read Trimming and FastQC
 
 We recommend using the wrapper [**TrimGalore!**](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/), which employs [**cutadapt**](https://wiki.gacrc.uga.edu/wiki/Cutadapt) to trim leftover adapter sequences from reads after demultiplexing, as well as to trim low quality bases at the ends of reads.
 
@@ -20,7 +20,7 @@ A new subdirectory called `/trimmed` will be created under each individual libra
 
 The `/trimmed` subdirectory will also contain the output from [**FastQC**](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for each individual library in your sequencing run.
 
-###### 1b. Read Alignment
+#### 1b. Read Alignment
 The scripts provided here make use of [**TopHat 2**](https://ccb.jhu.edu/software/tophat/index.shtml), a splice junction short read aligner for RNA-Seq data.
 
 To align your single-cell libraries, run the shell script [`sub_align.sh`]() from the terminal, specifying the directory of single-cell libraries you wish to align. This script calls and executes the PBS script [`align.pbs`](), which will submit the alignment jobs for each of the *trimmed* libraries in the specified directory as a job array.
@@ -52,7 +52,7 @@ This will create a new directory called `/tophat_out`, which contains the `.bam`
 
 Mapping rate statistics contained in the file `accepted_hits.stats` from each library can be summarized by running the script `comp_mapping_rates.m`
 
-###### 1c. Gene Expression Quantification
+#### 1c. Gene Expression Quantification
 
 [**FeatureCounts**](http://bioinformatics.oxfordjournals.org/content/30/7/923.full.pdf?keytype=ref&ijkey=ZzPz96t2lqzAH6F), part of the [**SubRead**](http://subread.sourceforge.net/) package, assigns aligned reads/fragments to genomic features, such as genes.
 
