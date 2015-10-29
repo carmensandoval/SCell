@@ -1,6 +1,6 @@
 # Single-Cell RNA-seq Analysis Protocol
 
-This document is intended to serve as a general outline of the steps to follow when analyzing single-cell RNA-seq libraries, from pre-processing and alignment, to clustering and estimating gene expression variation across cells and clusters.
+This document is intended to serve as a general outline of the steps to follow when analyzing single-cell RNA-seq libraries, from pre-processing and alignment, to clustering and estimating gene expression variation across cells and clusters using SCell, an integrated software tool to analyze large ensembles of single-cell RNA-seq datasets.
 
 ## 1. Library Pre-processing
 
@@ -116,7 +116,7 @@ Refer to the [Normalization by Library Size](https://github.com/carmensandoval/S
 
 Remove unwanted variation due to cell cycle state.
 
-SCell utilizes canonical-correlation analysis (CCA) on cyclins/CDKs to correlate cell-cycle and gene expression.
+SCell utilizes canonical-correlation analysis (CCA) on cyclins/CDKs to correlate cell-cycle and gene expression. It will estimate the percentage of genome-wide variance explained by cyclin/CDKs, the specific cyclins/CDKs that explain the highest percentage of variance and the genes that correlate most strongly with cyclin/CDKs.
 
 It can produce counts normalized by any combination of:
 
@@ -130,25 +130,31 @@ To normalize for the effect of cell cycle on gene expression, in addition to nor
 
 #### 2.4. Dimensionality Reduction by PCA
 
-Varimax Rotation
+SCell implements PCA for dimensionality reduction, and optionally Varimax-rotation to post-process the PCA. Varimax rotates the PCA axes in order to reduce the number of genes strongly loading two axes. By default, PC1 and PC2 are the axes shown on the PCA score and loading plots, but this can be specified by the user.
 
-Sample Scores
+Explore strongly loading genes in your dataset.
 
-Gene Loadings
+To perform PCA on pre-filtered, normalized samples after selecting a meaningful gene panel, refer to the  SCell manual section [Dimensionality Reduction).](https://github.com/carmensandoval/SCell/blob/master/Manual.md#4-dimensionality-reduction-pca)
 
 #### 2.5. Clustering
-Clustering Algorithms
+
+SCell implements several methods for clustering:
 
 - k-means
-- Gaussian mixture
+- Minkowski-weighted k-means
+- Gaussian mixture model
 - DBSCAN
-- Minkowski weighted k-means
 
 #### 2.6 Visualizing Gene Expression
- - Regression methods
+
+SCell provides options for fitting loess/lowess regressions, as well as several interpolation algorithms (linear, cubic spline, biharmonic and thin-plate spline) to gene expression across samples in PCA space. This allows for the visualization of expression
+gradients, and the evaluation of gene expression kinetics along minimum-spanning trees.
+
 
 #### 2.7 Minimum-Spanning Trees and Lineage Trajectory
 
 Viewing Gene Expression across trees
 
 #### 2.8 Iterative PCA and Clustering
+
+A PCA can be recomputed at any time from the user's sample list, enabling "iterative" PCA learning of population sub-structure.
