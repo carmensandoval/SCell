@@ -4,7 +4,7 @@ This document is intended to serve as a general outline of the steps to follow w
 
 ## 1. Library Pre-processing
 
-#### 1a. Read Trimming and FastQC
+#### 1.1. Read Trimming and FastQC
 
 We recommend using the wrapper [**TrimGalore!**](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/), which employs [**cutadapt**](https://wiki.gacrc.uga.edu/wiki/Cutadapt) to trim leftover adapter sequences from reads after demultiplexing, as well as to trim low quality bases at the ends of reads.
 
@@ -20,7 +20,7 @@ A new subdirectory called `/trimmed` will be created under each individual libra
 
 The `/trimmed` subdirectory will also contain the output from [**FastQC**](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for each individual library in your sequencing run.
 
-#### 1b. Read Alignment
+#### 1.2. Read Alignment
 The scripts provided here make use of [**TopHat 2**](https://ccb.jhu.edu/software/tophat/index.shtml), a splice junction short read aligner for RNA-Seq data.
 
 To align your single-cell libraries, run the shell script [`sub_align.sh`]() from the terminal, specifying the directory of single-cell libraries you wish to align. This script calls and executes the PBS script [`align.pbs`](), which will submit the alignment jobs for each of the *trimmed* libraries in the specified directory as a job array.
@@ -52,7 +52,7 @@ This will create a new directory called `/tophat_out`, which contains the `.bam`
 
 Mapping rate statistics contained in the file `accepted_hits.stats` from each library can be summarized by running the script `comp_mapping_rates.m`
 
-#### 1c. Gene Expression Quantification
+#### 1.3. Gene Expression Quantification
 
 [**FeatureCounts**](http://bioinformatics.oxfordjournals.org/content/30/7/923.full.pdf?keytype=ref&ijkey=ZzPz96t2lqzAH6F), part of the [**SubRead**](http://subread.sourceforge.net/) package, assigns aligned reads/fragments to genomic features, such as genes.
 
@@ -75,33 +75,67 @@ In the `run_featureCounts.pbs` file, you must specify the path to the GTF file t
 annot="/usr/refs/Homo_sapiens/NCBI/build37.2/Annotation/genes_ercc.gtf"
 ```
 
-This will create a new directory named `/featureCounts_out`, which contains a tab-delimited text file with genes as rows, and columns as single-cell libraries. This matrix is ready to be imported into SCell for quality control and analysis.
+This will create a new directory named `/featureCounts_out`, which contains a tab-delimited text file with genes as rows, and columns as single-cell libraries.
 
-## 2. Data Analysis using SCell
+This matrix is ready to be imported into SCell for quality control and analysis.
 
-#####Quality Control
+#### 1.4. Data Import
 
-#####Library Normalization
-By library size
+Refer to the [Load Data and Metadata](https://github.com/carmensandoval/SCell/blob/master/Manual.md#1-load-data-and-metadata) section of the [SCell Manual](https://github.com/carmensandoval/SCell/blob/master/Manual.md#using-scell) for detailed instructions on how to import your data and start using SCell.
 
-Cell-cycle state regression
+## 2. Single-Cell Data Analysis using SCell
 
-ERCC spike-in molecules regression
+#### 2.1. Library Quality Control and Filtering
 
-#####Feature Selection
-Gene panel for analysis.
+SCell can identify low quality libraries by computing their Lorenz statistic. Briefly, it estimates genes expressed at background levels in a given sample, and filters samples whose background fraction is significantly larger than average, via a threshold on the Benjamini-Hochberg corrected q-value.
 
-- variation (index of dispersion)
-- percentage of cells expressing
-- zero-inflation power
+In our tests, samples that have a small q-value for our Lorenz-statistic have low library complexity, as measured by Gini-Simpson index (Simpson, 1949), and they have low coverage, as estimated by the Good-Turing statistic (Good, 1953). Moreover, in our data the Lorenz-statistic correlates with the results of live-dead staining (Pearson-correlation 0.7), marking as outliers cells which appeared red, as well as empty chambers.
 
-#####PCA / Clustering
+Libraries may also be manually filtered and excluded from further analysis based on other criteria shown in the SCell expression profiler, such as live/dead staining image call or number of genes tagged.
+
+Refer to the [Library Quality Control / Outlier Filtering](https://github.com/carmensandoval/SCell/blob/master/Manual.md#2-library-quality-control--outlier-filtering) section of the SCell Manual for detailed instructions on how to perform **library quality control and filtering**.
+
+#### 2.2 Feature Selection
+
+It is important to select a discriminating panel of genes useful for dimensionality reduction of your single-cell RNA-seq data.
+
+An ideal gene for dimensionality reduction is one that is sampled in a large number of cells, while at the same time exhibiting sufficient inter-cellular variance as to distinguish disparate cell types. In the low-coverage regime, typical of single-cell data, it can be difficult to distinguish when a gene is under-sampled due to technical limitations from when it is lowly expressed.
+SCell provides statistics for feature selection. It uses a score statistic derived from a generalized-Poisson model, to test for zero-inflation in each gene’s expression across cells.  
+
+Refer to the [Feature Selection](https://github.com/carmensandoval/SCell/blob/master/Manual.md#feature-selection) section of the SCell Manual for detailed instructions on how to select a meaningful gene set for analysis based on these metrics.
+
+#### 2.3. Library Normalization
+
+SCell can perform normalization of your libraries in several ways:
+
+##### a) Normalization by library size (counts per million)
+
+Refer to the [Normalization by Library Size](https://github.com/carmensandoval/SCell/blob/master/Manual.md#3a-feature-selection-and-normalization-by-library-size-cpm) section of the SCell manual.
+
+##### b) Latent variable regression based on cyclin/CDK expression
+
+Remove unwanted variation due to cell cycle state. 
+
+SCell utilizes canonical-correlation analysis (CCA) on cyclins/CDKs to correlate cell-cycle and gene expression.
+
+It can produce counts normalized by any combination of:
+
+1. Cyclins and cyclin-dependent kinases (a model of cell cycle state)
+
+2. A user supplied count matrix (enabling an arbitrary set of controls).
+
+c) Mutual background latent variable regression
+To normalize for the effect of cell cycle on gene expression, in addition to normalizing libraries by size, refer to the  SCell manual section [Normalization by Human Cyclins and Cyclin-Dependent Kinases (Cell Cycle Regression)](https://github.com/carmensandoval/SCell/blob/master/Manual.md#3b-normalization-by-human-cyclins-and-cyclin-dependent-kinases-cell-cycle-regression)
+
+#### 2.4. Dimensionality Reduction by PCA
+
 Varimax Rotation
 
 Sample Scores
 
 Gene Loadings
 
+#### 2.5. Clustering
 Clustering Algorithms
 
 - k-means
@@ -109,9 +143,11 @@ Clustering Algorithms
 - DBSCAN
 - Minkowski weighted k-means
 
-Viewing Gene Expression across samples
+#### 2.6 Visualizing Gene Expression
  - Regression methods
 
-####Minimum-Spanning Trees and Lineage Progression
+#### 2.7 Minimum-Spanning Trees and Lineage Trajectory
 
-Viewing Gene Expression across tree
+Viewing Gene Expression across trees
+
+#### 2.8 Iterative PCA and Clustering
