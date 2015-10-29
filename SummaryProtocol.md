@@ -93,7 +93,7 @@ In our tests, samples that have a small q-value for our Lorenz-statistic have lo
 
 Libraries may also be manually filtered and excluded from further analysis based on other criteria shown in the SCell expression profiler, such as live/dead staining image call or number of genes tagged.
 
-Refer to the [Library Quality Control / Outlier Filtering](https://github.com/carmensandoval/SCell/blob/master/Manual.md#2-library-quality-control--outlier-filtering) section of the SCell Manual for detailed instructions on how to perform **library quality control and filtering**.
+Refer to the [Library Quality Control / Outlier Filtering](https://github.com/carmensandoval/SCell/blob/master/Manual.md#2-library-quality-control--outlier-filtering) section of the SCell Manual for detailed instructions on how to perform library quality control and filtering.
 
 #### 2.2 Feature Selection
 
@@ -106,7 +106,7 @@ Refer to the [Feature Selection](https://github.com/carmensandoval/SCell/blob/ma
 
 #### 2.3. Library Normalization
 
-SCell can perform normalization of your libraries in several ways:
+SCell can perform count normalization in several ways:
 
 ##### a) Normalization by library size (counts per million)
 
@@ -114,7 +114,7 @@ Refer to the [Normalization by Library Size](https://github.com/carmensandoval/S
 
 ##### b) Latent variable regression based on cyclin/CDK expression
 
-Remove unwanted variation due to cell cycle state. 
+Remove unwanted variation due to cell cycle state.
 
 SCell utilizes canonical-correlation analysis (CCA) on cyclins/CDKs to correlate cell-cycle and gene expression.
 
@@ -124,8 +124,9 @@ It can produce counts normalized by any combination of:
 
 2. A user supplied count matrix (enabling an arbitrary set of controls).
 
-c) Mutual background latent variable regression
-To normalize for the effect of cell cycle on gene expression, in addition to normalizing libraries by size, refer to the  SCell manual section [Normalization by Human Cyclins and Cyclin-Dependent Kinases (Cell Cycle Regression)](https://github.com/carmensandoval/SCell/blob/master/Manual.md#3b-normalization-by-human-cyclins-and-cyclin-dependent-kinases-cell-cycle-regression)
+To normalize for the effect of cell cycle on gene expression, in addition to normalizing libraries by size, refer to the  SCell manual section [Normalization by Human Cyclins and Cyclin-Dependent Kinases (Cell Cycle Regression).](https://github.com/carmensandoval/SCell/blob/master/Manual.md#3b-normalization-by-human-cyclins-and-cyclin-dependent-kinases-cell-cycle-regression)
+
+##### c) Mutual background
 
 #### 2.4. Dimensionality Reduction by PCA
 
